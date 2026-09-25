@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Codificador e decodificador de mensagens com visualização passo a passo." />
+  <title>Codifica • Codificador de mensagens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Codifica início"><span class="brand-mark">{ }</span><span>codifica<span class="dot">.</span></span></a>
+    <span class="topbar-note"><span class="status-dot"></span> processamento local</span>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="eyebrow"><span>01</span> laboratório de mensagens</div>
+      <h1>Suas palavras,<br /><em>um novo código.</em></h1>
+      <p class="hero-copy">Codifique uma frase, acompanhe cada etapa do processo e reverta o resultado quando quiser. Tudo acontece no seu navegador.</p>
+    </section>
+
+    <section class="workspace" aria-label="Ferramenta de codificação">
+      <div class="panel input-panel">
+        <div class="panel-heading"><div><span class="panel-index">01</span><h2>Mensagem original</h2></div><span class="panel-tag">entrada</span></div>
+        <label for="message">Digite sua frase</label>
+        <textarea id="message" rows="5" placeholder="Ex.: O conhecimento é liberdade."></textarea>
+        <div class="field-footer"><span id="message-count">0 caracteres</span><span>UTF-8</span></div>
+        <label for="key">Chave de codificação <span class="required">obrigatória</span></label>
+        <div class="key-wrap"><input id="key" type="password" placeholder="Escolha uma chave secreta" autocomplete="off" /><button class="icon-button" id="toggle-key" type="button" aria-label="Mostrar chave">◉</button></div>
+        <p class="hint">A mesma chave será necessária para decodificar a mensagem.</p>
+        <button class="primary-button" id="encode-button" type="button"><span>Codificar mensagem</span><span class="arrow">↗</span></button>
+      </div>
+
+      <div class="panel output-panel">
+        <div class="panel-heading"><div><span class="panel-index">02</span><h2>Resultado codificado</h2></div><span class="panel-tag accent-tag">saída</span></div>
+        <label for="encoded">Seu código</label>
+        <textarea id="encoded" rows="5" placeholder="O resultado aparecerá aqui…" spellcheck="false"></textarea>
+        <div class="field-footer"><span id="encoded-count">0 caracteres</span><button class="copy-button" id="copy-button" type="button">Copiar código</button></div>
+        <div class="decode-box">
+          <div class="decode-heading"><div><span class="panel-index">03</span><h2>Recodificador</h2></div><span class="panel-tag">reverter</span></div>
+          <p>Cole um código acima e use a mesma chave para voltar à mensagem principal.</p>
+          <button class="secondary-button" id="decode-button" type="button"><span>Decodificar mensagem</span><span class="arrow">↘</span></button>
+          <div class="decoded-result" id="decoded-result" aria-live="polite"><span class="result-label">mensagem recuperada</span><strong id="decoded-text">A mensagem aparecerá aqui.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section">
+      <div class="section-heading"><div><div class="eyebrow"><span>02</span> por dentro do processo</div><h2>Veja como a mágica acontece.</h2></div><p>Um método simples, reversível e transparente. Nada fica escondido.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><div class="step-icon">Aa</div><h3>Transformar em bytes</h3><p>Cada caractere vira uma sequência numérica usando UTF-8, preservando acentos e emojis.</p><code id="step-bytes">—</code></article>
+        <article class="step-card"><span class="step-number">02</span><div class="step-icon">⊕</div><h3>Aplicar a chave</h3><p>Fazemos uma operação XOR entre cada byte e os bytes da sua chave, repetindo-a quando necessário.</p><code id="step-xor">—</code></article>
+        <article class="step-card"><span class="step-number">03</span><div class="step-icon">#</div><h3>Gerar o código</h3><p>Os bytes resultantes são convertidos para Base64, formando um código fácil de copiar.</p><code id="step-base64">—</code></article>
+      </div>
+      <div class="notice"><span class="notice-icon">i</span><p><strong>Nota importante:</strong> este projeto é uma ferramenta educativa de codificação. XOR com chave repetida não substitui criptografia profissional para dados sensíveis.</p></div>
+    </section>
+  </main>
+  <footer><span>codifica<span class="dot">.</span></span><span>feito para entender, não só esconder.</span></footer>
+  <div class="toast" id="toast" role="status">Código copiado!</div>
+  <script src="script.js"></script>
+</body>
+</html>
